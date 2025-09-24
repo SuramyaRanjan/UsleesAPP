@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UsLess App - Ultimate Game Collection</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Audio elements for background music and sound effects -->
+    <audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
+    <audio id="eat-sound" src="eat.wav" preload="auto"></audio>
+    <audio id="gameover-sound" src="gameover.wav" preload="auto"></audio>
+    <audio id="jump-sound" src="jump.wav" preload="auto"></audio>
+    <audio id="shoot-sound" src="shoot.wav" preload="auto"></audio>
+    <audio id="hit-sound" src="hit.wav" preload="auto"></audio>
+    <!-- Add more as needed -->
+
+    <div class="app-container">
+        <header class="app-header">
+            <h1 class="app-title">🎮 UsLess App</h1>
+            <p class="app-subtitle">The Ultimate Collection of Useless but Fun Games!</p>
+        </header>
+
+        <div class="sound-controls" style="text-align:right;margin-bottom:10px;">
+            <button id="mute-btn">🔊</button>
+        </div>
+
+        <nav class="game-nav">
+            <button class="nav-btn active" data-game="menu">🏠 Home</button>
+            <button class="nav-btn" data-game="snake">🐍 Snake</button>
+            <button class="nav-btn" data-game="shooter">🚀 Space Shooter</button>
+            <button class="nav-btn" data-game="breakout">🧱 Breakout</button>
+            <button class="nav-btn" data-game="jumper">🦘 Jumper</button>
+        </nav>
+
+        <main class="game-container">
+            <!-- Home Menu -->
+            <div id="menu" class="game-screen active">
+                <div class="menu-content">
+                    <h2>Welcome to UsLess App!</h2>
+                    <p class="char-select-title">Who do you want to play as?</p>
+                    <div class="character-grid">
+                        <div class="character-card bauwa" data-character="BAUWA">
+                            <div class="character-graphics">🤓</div>
+                            <h3>BAUWA</h3>
+                        </div>
+                        <div class="character-card bong" data-character="BONG">
+                            <div class="character-graphics">😎</div>
+                            <h3>BONG</h3>
+                        </div>
+                        <div class="character-card bhops" data-character="BHOPS">
+                            <div class="character-graphics">🤠</div>
+                            <h3>BHOPS</h3>
+                        </div>
+                        <div class="character-card gentu" data-character="GENTU">
+                            <div class="character-graphics">🧐</div>
+                            <h3>GENTU</h3>
+                        </div>
+                    </div>
+                    <button id="proceed-btn" disabled>Proceed to Games</button>
+
+                    <hr style="margin:35px 0;border:0;border-top:3px dashed #ffd166">
+                    <p>Or choose your favorite game directly:</p>
+                    <div class="game-grid">
+                        <div class="game-card" data-game="snake">
+                            <h3>🐍 Snake Game</h3>
+                            <p>Classic snake game with power-ups and obstacles</p>
+                        </div>
+                        <div class="game-card" data-game="shooter">
+                            <h3>🚀 Space Shooter</h3>
+                            <p>Defend Earth from alien invasion</p>
+                        </div>
+                        <div class="game-card" data-game="breakout">
+                            <h3>🧱 Breakout</h3>
+                            <p>Break all bricks with your ball</p>
+                        </div>
+                        <div class="game-card" data-game="jumper">
+                            <h3>🦘 Jumper</h3>
+                            <p>Jump over obstacles and collect coins</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Snake Game -->
+            <div id="snake" class="game-screen">
+                <div class="game-info">
+                    <span>Score: <span id="snake-score">0</span></span>
+                    <span>High Score: <span id="snake-high">0</span></span>
+                </div>
+                <canvas id="snake-canvas" width="400" height="400"></canvas>
+                <div class="game-controls">
+                    <p>Use WASD or Arrow Keys to move</p>
+                    <button id="snake-restart">Restart</button>
+                </div>
+            </div>
+
+            <!-- Space Shooter -->
+            <div id="shooter" class="game-screen">
+                <div class="game-info">
+                    <span>Score: <span id="shooter-score">0</span></span>
+                    <span>Lives: <span id="shooter-lives">3</span></span>
+                </div>
+                <canvas id="shooter-canvas" width="600" height="400"></canvas>
+                <div class="game-controls">
+                    <p>Use A/D to move, SPACE to shoot</p>
+                    <button id="shooter-restart">Restart</button>
+                </div>
+            </div>
+
+            <!-- Breakout Game -->
+            <div id="breakout" class="game-screen">
+                <div class="game-info">
+                    <span>Score: <span id="breakout-score">0</span></span>
+                    <span>Lives: <span id="breakout-lives">3</span></span>
+                </div>
+                <canvas id="breakout-canvas" width="600" height="400"></canvas>
+                <div class="game-controls">
+                    <p>Use A/D or Left/Right to move paddle</p>
+                    <button id="breakout-restart">Restart</button>
+                </div>
+            </div>
+
+            <!-- Jumper Game -->
+            <div id="jumper" class="game-screen">
+                <div class="game-info">
+                    <span>Score: <span id="jumper-score">0</span></span>
+                    <span>High Score: <span id="jumper-high">0</span></span>
+                </div>
+                <canvas id="jumper-canvas" width="800" height="300"></canvas>
+                <div class="game-controls">
+                    <p>Press SPACE to jump</p>
+                    <button id="jumper-restart">Restart</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="gameover-overlay" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(30,20,36,0.55); z-index:50; align-items:center; justify-content:center; flex-direction:column;">
+    <img id="gameover-img" src="" alt="Game Over Animation" style="width:320px; max-width:85vw; border-radius:26px; box-shadow:0 2px 36px #0008;" />
+    <div style="font-size:2.2rem; color:#FFD166; margin-top:18px; font-weight:bold; text-shadow:0 2px 22px #2228;">Game Over!</div>
+    <button id="close-overlay" style="margin-top:32px; padding: 10px 38px; font-size:1.2rem; border-radius:26px; border:none; background:linear-gradient(90deg,#ff9a9e,#ffd166); color:#fff; font-weight:bold; cursor:pointer;">Close</button>
+</div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
